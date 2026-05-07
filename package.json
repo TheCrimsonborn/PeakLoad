@@ -5,7 +5,7 @@
   "main": "sw.js",
   "scripts": {
     "test": "vitest run",
-    "build": "exit 0"
+    "build": "echo 'No build step needed' && exit 0"
   },
   "repository": {
     "type": "git",
