@@ -3,21 +3,6 @@
   publish = "."
 
 [[redirects]]
-  from = "/squat-1rm-calculator"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/bench-press-warm-up-planner"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
-  from = "/rpe-rir-translator"
-  to = "/index.html"
-  status = 200
-
-[[redirects]]
   from = "/*"
   to = "https://peakloads.com/:splat"
   status = 301
