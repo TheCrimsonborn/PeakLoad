@@ -58,9 +58,24 @@ document.addEventListener('DOMContentLoaded', () => {
     loadState();
     updateUnitDisplays();
 
+    // Debounce function
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func(...args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+
+    const debouncedSaveState = debounce(saveState, 300);
+
     // Auto-save state on user input
-    document.addEventListener('input', saveState);
-    document.addEventListener('change', saveState);
+    document.addEventListener('input', debouncedSaveState);
+    document.addEventListener('change', debouncedSaveState);
 
     // --- Event Listeners ---
 
@@ -322,6 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function renderPercentageTable(data) {
         tableBodyPct.innerHTML = '';
+        const fragment = document.createDocumentFragment();
         data.forEach(row => {
             const tr = document.createElement('tr');
             
@@ -337,12 +353,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
             tr.appendChild(tdPercent);
             tr.appendChild(tdWeight);
-            tableBodyPct.appendChild(tr);
+            fragment.appendChild(tr);
         });
+        tableBodyPct.appendChild(fragment);
     }
 
     function renderWarmupTable(data) {
         tableBodyWarmup.innerHTML = '';
+        const fragment = document.createDocumentFragment();
         data.forEach(row => {
             const tr = document.createElement('tr');
 
@@ -362,12 +380,14 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.appendChild(tdPercent);
             tr.appendChild(tdWeight);
             tr.appendChild(tdReps);
-            tableBodyWarmup.appendChild(tr);
+            fragment.appendChild(tr);
         });
+        tableBodyWarmup.appendChild(fragment);
     }
 
     function renderAdvWarmupTable(data) {
         tableBodyAdvWarmup.innerHTML = '';
+        const fragment = document.createDocumentFragment();
         data.forEach(row => {
             const tr = document.createElement('tr');
 
@@ -403,8 +423,9 @@ document.addEventListener('DOMContentLoaded', () => {
             tr.appendChild(tdWeight);
             tr.appendChild(tdReps);
             tr.appendChild(tdNotes);
-            tableBodyAdvWarmup.appendChild(tr);
+            fragment.appendChild(tr);
         });
+        tableBodyAdvWarmup.appendChild(fragment);
     }
 
     // Set current year in footer

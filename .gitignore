@@ -1,7 +1,1 @@
-# Docker
-Dockerfile
-.dockerignore
-docker-compose.yml
-.env
-*.tar
-.tar
+node_modules

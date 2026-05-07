@@ -29,14 +29,22 @@ self.addEventListener('install', event => {
 self.addEventListener('fetch', event => {
     event.respondWith(
         caches.match(event.request)
-            .then(response => {
-                // Cache hit - return response
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).catch(() => {
-                    // Optional: Return an offline fallback page here if applicable
+            .then(cachedResponse => {
+                const fetchPromise = fetch(event.request).then(networkResponse => {
+                    // Optionally, we can put the new response in the cache
+                    if (networkResponse && networkResponse.status === 200 && networkResponse.type === 'basic') {
+                        const responseToCache = networkResponse.clone();
+                        caches.open(CACHE_NAME).then(cache => {
+                            cache.put(event.request, responseToCache);
+                        });
+                    }
+                    return networkResponse;
+                }).catch(() => {
+                    // Network failed, we might handle offline fallbacks here if necessary
                 });
+
+                // Return the cached response immediately if there is one, otherwise wait for the network response
+                return cachedResponse || fetchPromise;
             })
     );
 });

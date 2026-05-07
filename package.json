@@ -1,0 +1,24 @@
+{
+  "name": "app",
+  "version": "1.0.0",
+  "description": "peakloads is a sleek powerlifting companion that helps you plan training sessions with confidence. Estimate your one-rep max using the Epley, Brzycki, or Lombardi formulas, then convert those numbers into ready-to-use percentage tables for programming.",
+  "main": "sw.js",
+  "scripts": {
+    "test": "vitest run"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TheCrimsonborn/PeakLoad.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/TheCrimsonborn/PeakLoad/issues"
+  },
+  "homepage": "https://github.com/TheCrimsonborn/PeakLoad#readme",
+  "devDependencies": {
+    "vitest": "^4.1.5"
+  }
+}
