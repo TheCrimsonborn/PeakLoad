@@ -4,7 +4,8 @@
   "description": "peakloads is a sleek powerlifting companion that helps you plan training sessions with confidence. Estimate your one-rep max using the Epley, Brzycki, or Lombardi formulas, then convert those numbers into ready-to-use percentage tables for programming.",
   "main": "sw.js",
   "scripts": {
-    "test": "vitest run"
+    "test": "vitest run",
+    "build": "echo 'No build step needed'"
   },
   "repository": {
     "type": "git",
