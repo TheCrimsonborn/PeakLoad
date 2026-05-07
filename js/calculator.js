@@ -2,12 +2,12 @@
  * peakloads Calculator Logic
  */
 
-const KG_TO_LB = 2.2046226218;
+import { toKg, fromKg } from './units.js';
 
 const Calculator = {
     // Unit Conversion
-    toKg: (value, unit) => (unit === 'kg' ? value : value / KG_TO_LB),
-    fromKg: (valueKg, unit) => (unit === 'kg' ? valueKg : valueKg * KG_TO_LB),
+    toKg,
+    fromKg,
 
     // Rounding logic based on unit (2.5kg or 5lb steps)
     roundWeight: (weight, unit) => {

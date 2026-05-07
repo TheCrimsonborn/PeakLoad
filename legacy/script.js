@@ -1,3 +1,5 @@
+import { KG_TO_LB, toKg, fromKg } from "../js/units.js";
+
 const oneRmForm = document.getElementById("one-rm-form");
 const oneRmOutput = document.getElementById("one-rm-output");
 const baseWeightInput = document.getElementById("base-weight-input");
@@ -648,7 +650,6 @@ const COPY = {
   },
 };
 
-const KG_TO_LB = 2.2046226218;
 const UNIT_CONFIG = {
   kg: { label: "kg", step: 0.5, precision: 1, scale: 1 },
   lb: { label: "lb", step: 1, precision: 0, scale: KG_TO_LB },
@@ -692,9 +693,6 @@ const FORMULAS = {
 };
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-const toKg = (value, unit) => (unit === "kg" ? value : value / KG_TO_LB);
-const fromKg = (valueKg, unit) => (unit === "kg" ? valueKg : valueKg * KG_TO_LB);
 
 const formatTemplateWithValue = (template, value) => {
   if (typeof template !== "string") {
