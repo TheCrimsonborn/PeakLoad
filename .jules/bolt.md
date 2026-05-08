@@ -1,0 +1,3 @@
+19:50-08/05/2024 : [Optimize Table Rendering]
+Learning: Repetitive synchronous DOM appends within loops cause layout thrashing and negatively impact performance, particularly noticeable when generating potentially large tables for percentages and warm-ups.
+Action: Implemented `DocumentFragment` to batch DOM insertions in `renderPercentageTable`, `renderWarmupTable`, and `renderAdvWarmupTable`, appending to the DOM only once per rendering function.
