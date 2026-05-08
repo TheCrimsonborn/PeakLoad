@@ -5,3 +5,5 @@ docker-compose.yml
 .env
 *.tar
 .tar
+node_modules/
+coverage/
