@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderPercentageTable(data) {
-        tableBodyPct.textContent = '';
+        tableBodyPct.innerHTML = '';
         data.forEach(row => {
             const tr = document.createElement('tr');
             
@@ -342,7 +342,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderWarmupTable(data) {
-        tableBodyWarmup.textContent = '';
+        tableBodyWarmup.innerHTML = '';
         data.forEach(row => {
             const tr = document.createElement('tr');
 
@@ -367,7 +367,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function renderAdvWarmupTable(data) {
-        tableBodyAdvWarmup.textContent = '';
+        tableBodyAdvWarmup.innerHTML = '';
         data.forEach(row => {
             const tr = document.createElement('tr');
 
