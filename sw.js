@@ -27,17 +27,34 @@ self.addEventListener('install', event => {
 });
 
 self.addEventListener('fetch', event => {
+    // Only handle GET requests for caching
+    if (event.request.method !== 'GET') {
+        return;
+    }
+
+    // Optimization: Stale-While-Revalidate caching strategy
+    // Returns cached response immediately for fast load times,
+    // while simultaneously fetching the latest version from network to update cache in the background.
     event.respondWith(
-        caches.match(event.request)
-            .then(response => {
-                // Cache hit - return response
-                if (response) {
-                    return response;
-                }
-                return fetch(event.request).catch(() => {
+        caches.open(CACHE_NAME).then(cache => {
+            return cache.match(event.request).then(cachedResponse => {
+                const fetchPromise = fetch(event.request).then(networkResponse => {
+                    // Update cache with new response
+                    if (networkResponse && networkResponse.status === 200) {
+                        cache.put(event.request, networkResponse.clone());
+                    }
+                    return networkResponse;
+                }).catch(() => {
                     // Optional: Return an offline fallback page here if applicable
                 });
-            })
+
+                // Ensure the Service Worker stays alive until the cache is updated
+                event.waitUntil(fetchPromise);
+
+                // Return cached response if available, otherwise wait for network fetch
+                return cachedResponse || fetchPromise;
+            });
+        })
     );
 });
 
