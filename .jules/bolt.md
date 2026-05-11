@@ -9,3 +9,7 @@ Action: [When iterating over a known set of elements (like inputs for state savi
 19:45-10/05/2026 : [Service Worker Background Fetch Termination]
 Learning: When implementing a Stale-While-Revalidate caching strategy, the browser may aggressively terminate the Service Worker while the background fetch is still executing. This prevents the cache from being updated properly, leaving users stuck with stale assets.
 Action: Always wrap background fetch promises in `event.waitUntil()` inside the `fetch` event listener to ensure the worker stays alive until the revalidation completes.
+
+22:45-11/05/2026 : [Avoid Forced Synchronous Layouts on Initialization]
+Learning: Calling a layout-triggering method like `scrollIntoView()` immediately after making batch DOM changes (like `classList.add`/`remove`) in a loop forces the browser to calculate layout synchronously. This causes "layout thrashing" and blocks the main thread, resulting in poor First Contentful Paint metrics.
+Action: Always defer layout-triggering actions (like scroll functions or measuring elements) using `requestAnimationFrame()` to allow the browser to paint DOM mutations first.

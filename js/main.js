@@ -108,12 +108,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function activateSection(targetId) {
         if (!targetId) targetId = 'section-1rm'; // Default
 
+        let targetBtnToScroll = null;
+
         // Update Nav
         navBtns.forEach(btn => {
             btn.classList.remove('active');
             if (btn.getAttribute('href') === `#${targetId}`) {
                 btn.classList.add('active');
-                btn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                targetBtnToScroll = btn;
             }
         });
 
@@ -124,6 +126,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 sec.classList.add('active');
             }
         });
+
+        // Defer layout-triggering scroll to avoid forced synchronous layout
+        // giving the browser a chance to paint the DOM class mutations first
+        if (targetBtnToScroll) {
+            requestAnimationFrame(() => {
+                targetBtnToScroll.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+            });
+        }
     }
 
     // Handle clicks on nav links
