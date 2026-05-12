@@ -13,3 +13,7 @@ Action: Always wrap background fetch promises in `event.waitUntil()` inside the 
 ## 2026-05-12 - [Defer Layout-Triggering Methods]
 **Learning:** Calling `scrollIntoView()` immediately after DOM mutations (like adding/removing classes) forces synchronous reflows, causing Lighthouse 'forced-reflow-insight' warnings and thread blocking.
 **Action:** Defer layout-triggering methods using `requestAnimationFrame()` until after the browser has completed batch DOM mutations.
+
+## 2026-05-12 - [Lighthouse CI Server vs Nginx Config]
+**Learning:** When using `lhci autorun --collect.staticDistDir=.` for local testing, Lighthouse spins up its own basic web server which does not read or apply `nginx.conf` rules. Therefore, optimizations made in `nginx.conf` (like Cache-Control headers) cannot be verified locally using this method, and Lighthouse will continue to warn about `uses-long-cache-ttl`.
+**Action:** Remember that Nginx infrastructure optimizations cannot be validated locally with Lighthouse CI's static server. Trust the Nginx configuration syntax and verify it in a staging/production Nginx environment.
