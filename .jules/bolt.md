@@ -13,3 +13,6 @@ Action: Always wrap background fetch promises in `event.waitUntil()` inside the 
 ## 2026-05-12 - [Defer Layout-Triggering Methods]
 **Learning:** Calling `scrollIntoView()` immediately after DOM mutations (like adding/removing classes) forces synchronous reflows, causing Lighthouse 'forced-reflow-insight' warnings and thread blocking.
 **Action:** Defer layout-triggering methods using `requestAnimationFrame()` until after the browser has completed batch DOM mutations.
+18:45-14/05/2024 : [Service Worker Cache Busting with Nginx]
+Learning: When adding global Cache-Control headers for static assets like JS and CSS files in Nginx, you must explicitly exclude `sw.js` using an exact match location block. Otherwise, the browser caches the Service Worker itself, blocking all subsequent application updates.
+Action: Always add `location = /sw.js { add_header Cache-Control "no-cache, no-store, must-revalidate"; }` before broad static asset caching rules.
