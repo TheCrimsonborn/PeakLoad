@@ -11,7 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const el of cachedStateInputs) {
         stateInputsById[el.id] = el;
     }
-    const cachedUnitDisplays = document.getElementsByClassName('unit-display');
+    // Optimization: querySelectorAll captures a static NodeList of permanent elements at initialization.
+    // This avoids iterating over and updating dynamically generated ephemeral elements
+    // (e.g., in tables) that are destroyed immediately afterward during recalculation.
+    const cachedUnitDisplays = document.querySelectorAll('.unit-display');
     const unitBtns = document.querySelectorAll('.unit-btn');
     const langSelect = document.getElementById('lang-select');
     const navBtns = document.querySelectorAll('.nav-btn');
