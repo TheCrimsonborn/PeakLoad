@@ -13,3 +13,7 @@ Action: Always wrap background fetch promises in `event.waitUntil()` inside the 
 ## 2026-05-12 - [Defer Layout-Triggering Methods]
 **Learning:** Calling `scrollIntoView()` immediately after DOM mutations (like adding/removing classes) forces synchronous reflows, causing Lighthouse 'forced-reflow-insight' warnings and thread blocking.
 **Action:** Defer layout-triggering methods using `requestAnimationFrame()` until after the browser has completed batch DOM mutations.
+
+## 2026-05-17 - [Static NodeList vs Live HTMLCollection]
+**Learning:** Iterating over live `HTMLCollection` objects (e.g., from `getElementsByClassName`) when repeatedly updating DOM elements is inefficient, especially if the collection encompasses dynamically generated, ephemeral elements that will soon be destroyed. This causes redundant loop iterations and layout thrashing.
+**Action:** Prefer using `querySelectorAll` to capture a static `NodeList` of permanent elements at initialization to prevent redundant loop iterations and layout thrashing.
