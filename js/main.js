@@ -11,7 +11,11 @@ document.addEventListener('DOMContentLoaded', () => {
     for (const el of cachedStateInputs) {
         stateInputsById[el.id] = el;
     }
-    const cachedUnitDisplays = document.getElementsByClassName('unit-display');
+
+    // Performance: Use querySelectorAll to capture a static NodeList of permanent unit-display elements.
+    // This prevents the application from iterating over dynamically generated, ephemeral table elements
+    // captured by the live HTMLCollection of getElementsByClassName, which causes unnecessary iterations and layout thrashing.
+    const cachedUnitDisplays = document.querySelectorAll('.unit-display');
     const unitBtns = document.querySelectorAll('.unit-btn');
     const langSelect = document.getElementById('lang-select');
     const navBtns = document.querySelectorAll('.nav-btn');
